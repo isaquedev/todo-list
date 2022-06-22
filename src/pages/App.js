@@ -4,15 +4,20 @@ import "./App.scss"
 
 function App() {
 
-  let list = ["Comprar pão", "Botar água pro gato", "Jogar fora o lixo"]
+  let list = [
+    { name: "Comprar pão", checked: false },
+    { name: "Comprar leite", checked: true }
+  ]
 
   const [text, setText] = useState("")
   const [todos, setTodos] = useState(list)
 
   function handleSubmitForm(event) {
     event.preventDefault()
-    addTodo(text)
-    setText("")
+    if (text.length > 0) {
+      addTodo(text)
+      setText("")
+    }
   }
 
   function handleChangeText(event) {
@@ -20,8 +25,28 @@ function App() {
   }
 
   function addTodo(text) {
-    todos.push(text)
-    setTodos([...todos])
+    todos.push({
+      name: text,
+      checked: false
+    })
+
+    updateTodos(todos)
+  }
+
+  function handleToggleChecked(item) {
+    const itemIndex = todos.indexOf(item)
+
+    item.checked = !item.checked
+    todos[itemIndex] = item
+    
+    updateTodos(todos)
+  }
+
+  function updateTodos(todos) {
+    const checkedTodos = todos.filter(todo => todo.checked)
+    const uncheckedTodos = todos.filter(todo => !todo.checked)
+
+   setTodos([...uncheckedTodos, ...checkedTodos])
   }
 
   return (
@@ -48,9 +73,10 @@ function App() {
               return (
                 <p 
                   key={item}
-                  className="todoItem"
+                  onClick={() => handleToggleChecked(item)}
+                  className={`todoItem ${item.checked ? "todoItemCompleted" : "todoItemDefault"}`}
                 >
-                  {item}
+                  {item.name}
                 </p>
               )
             })

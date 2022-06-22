@@ -58,4 +58,18 @@
 
 .todoItem {
   font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.todoItemCompleted {
+  border: 1px solid #CFD8DC;
+  border-left: 4px solid #CFD8DC;
+  color: gray;
+}
+
+.todoItemDefault {
+  border: 1px solid #2196F3;
+  border-left: 4px solid #2196F3;
 }
