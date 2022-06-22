@@ -1,16 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.scss"
 
 function App() {
 
-  let list = [
-    { name: "Comprar pão", checked: false, created: new Date() },
-    { name: "Comprar leite", checked: true, created: new Date() }
-  ]
-
   const [text, setText] = useState("")
-  const [todos, setTodos] = useState(list)
+  const [todos, setTodos] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const databaseTodos = localStorage.getItem("todos")
+    if (databaseTodos) {
+      const todos = JSON.parse(databaseTodos)
+
+      const formattedTodos = todos.map(todo => {
+        return {
+          name: todo.name,
+          checked: todo.checked,
+          created: new Date(todo.created)
+        }
+      })
+      
+      setTodos(formattedTodos)
+    }
+    setIsLoading(false)
+  }, [])
+
+  useEffect(() => {
+    if (!isLoading) {
+      localStorage.setItem("todos", JSON.stringify(todos))
+    }
+  }, [todos])
 
   function handleSubmitForm(event) {
     event.preventDefault()
@@ -47,7 +67,13 @@ function App() {
     const checkedTodos = todos.filter(todo => todo.checked)
     const uncheckedTodos = todos.filter(todo => !todo.checked)
 
-   setTodos([...uncheckedTodos, ...checkedTodos])
+    const newTodos = [...uncheckedTodos, ...checkedTodos]
+
+    setTodos(newTodos)
+  }
+
+  function cleanTodos() {
+    setTodos([])
   }
 
   return (
@@ -55,7 +81,12 @@ function App() {
       <div className="content">
         <div className="todoHeader">
           <h1 className="todoTitle">Lista de tarefas</h1>
-          <button className="todoButton">Limpar</button>
+          <button 
+            className="todoButton"
+            onClick={cleanTodos}
+          >
+            Limpar
+          </button>
         </div>
         <form onSubmit={handleSubmitForm} className="todoForm">
           <input 
