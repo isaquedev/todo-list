@@ -4,33 +4,17 @@ import "./App.scss"
 
 function App() {
 
+  //Feature login
+
   const [text, setText] = useState("")
   const [todos, setTodos] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const databaseTodos = localStorage.getItem("todos")
-    if (databaseTodos) {
-      const todos = JSON.parse(databaseTodos)
-
-      const formattedTodos = todos.map(todo => {
-        return {
-          name: todo.name,
-          checked: todo.checked,
-          created: new Date(todo.created)
-        }
-      })
-      
-      setTodos(formattedTodos)
-    }
-    setIsLoading(false)
-  }, [])
-
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem("todos", JSON.stringify(todos))
-    }
-  }, [todos])
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     localStorage.setItem("todos", JSON.stringify(todos))
+  //   }
+  // }, [todos])
 
   function handleSubmitForm(event) {
     event.preventDefault()
