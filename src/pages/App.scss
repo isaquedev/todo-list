@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  background-color: #2196F3;
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 600px;
+  background-color: white;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  margin: 16px auto;
+  padding: 16px;
+}
+
+.todoHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.todoTitle {
+  flex: 1;
+  font-size: 18px;
+}
+
+.todoButton {
+  border: none;
+  border-radius: 4px;
+  background-color: #2196F3;
+  color: white;
+  padding: 4px 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.todoForm {
+  display: flex;
+  gap: 4px;
+}
+
+.todoFormInput {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #2196F3;
+  flex: 1;
+}
+
+.todoFormButton {
+  border: none;
+  background-color: transparent;
+  font-weight: 700;
+  color: #2196F3;
+  font-size: 18px;
+  padding: 4px;
+}
+
+.todoItem {
+  font-size: 14px;
+}
