@@ -5,6 +5,7 @@
 }
 
 .content {
+  width: 80%;
   max-width: 600px;
   background-color: white;
   border-radius: 8px;
@@ -45,6 +46,11 @@
   border-radius: 4px;
   border: 1px solid #2196F3;
   flex: 1;
+  font-size: 16px;
+
+  &::placeholder {
+    font-size: 16px;
+  }
 }
 
 .todoFormButton {
@@ -56,20 +62,38 @@
   padding: 4px;
 }
 
+.todoList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
 .todoItem {
-  font-size: 14px;
   padding: 4px 8px;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
+
+  & > p {
+    margin: 4px 0;
+  }
 }
 
 .todoItemCompleted {
   border: 1px solid #CFD8DC;
-  border-left: 4px solid #CFD8DC;
+  border-left: 6px solid #CFD8DC;
   color: gray;
 }
 
 .todoItemDefault {
   border: 1px solid #2196F3;
-  border-left: 4px solid #2196F3;
+  border-left: 6px solid #2196F3;
+}
+
+.todoItemText {
+  font-size: 16px;
+}
+
+.todoItemDate {
+  font-size: 14px;
 }

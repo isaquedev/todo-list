@@ -5,8 +5,8 @@ import "./App.scss"
 function App() {
 
   let list = [
-    { name: "Comprar pão", checked: false },
-    { name: "Comprar leite", checked: true }
+    { name: "Comprar pão", checked: false, created: new Date() },
+    { name: "Comprar leite", checked: true, created: new Date() }
   ]
 
   const [text, setText] = useState("")
@@ -27,7 +27,8 @@ function App() {
   function addTodo(text) {
     todos.push({
       name: text,
-      checked: false
+      checked: false,
+      created: new Date()
     })
 
     updateTodos(todos)
@@ -67,17 +68,18 @@ function App() {
             +
           </button>
         </form>
-        <div>
+        <div className="todoList">
           {
             todos.map(item => {
               return (
-                <p 
+                <div 
                   key={item}
                   onClick={() => handleToggleChecked(item)}
                   className={`todoItem ${item.checked ? "todoItemCompleted" : "todoItemDefault"}`}
                 >
-                  {item.name}
-                </p>
+                  <p className="todoItemText">{item.name}</p>
+                  <p className="todoItemDate">{new Intl.DateTimeFormat().format(item.created)}</p>
+                </div>
               )
             })
           }
